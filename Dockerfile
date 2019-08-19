@@ -10,6 +10,8 @@ RUN apk add --no-cache --update \
     git \
     wget \
     curl \
+    imagemagick \
+    file \
     vim \
     build-base \
     python \
@@ -43,6 +45,8 @@ RUN git clone --depth 1 git://github.com/sstephenson/rbenv.git ${RBENV_ROOT} \
 && ${RBENV_ROOT}/plugins/ruby-build/install.sh
 
 RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh 
+RUN echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+RUN echo 'gem: --no-rdoc --no-ri' >> ~/.gemrc
 
 RUN rbenv install -v $RUBY_VERSION \
 &&  rbenv global $RUBY_VERSION
